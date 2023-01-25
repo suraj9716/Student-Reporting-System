@@ -162,8 +162,8 @@ public class StudenServiceImplementation implements StudentService{
 			}
 		}
 		
-	   maxList.add(srepo.findByEmail(s1));
-	   maxList.add(srepo.findByEmail(s2));
+	    maxList.add(srepo.findByEmail(s1));
+	    maxList.add(srepo.findByEmail(s2));
 		return maxList;
 
 	}
