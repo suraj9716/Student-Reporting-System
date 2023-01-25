@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main{
+            border:  2px solid black;
+            margin-top: 30px;
+        }
+        #main>div{
+            display: flex;
+            justify-content: space-evenly;
+            border:  2px solid teal;
+        }
+        .main{
+            width: 70%;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            border: 2px solid black;
+            padding: 15px;
+        }
+        .main>a{
+            text-decoration: none;
+            font-size: 30px;
+            color :black;
+        }
+        .main>a:hover{
+            color: white;
+            background-color: red;
+           
+            font-size:29px ;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <a href="addstudentwithmarksandsemester.html">Add Student</a>
+        <a href="averagemarksstudents.html">Average Marks</a>
+        <a href="top2students.html">Top 2 Students</a>
+        <a href="percentageofwholeclassinsemester.html">Percentage of Class</a>
+        <a href="seestudentreport.html">Student Report</a>
+        </div>
+    <h1> Average Percentage of whole class in recent semester</h1>
+
+    <h2>Enter semester to see Average Percentage of whole class in that semester</h2>
+    <input type="text" id="check">
+    <button onclick="myfun()">Submit</button>
+    <div id="main">
+
+    </div>
+</body>
+</html>
+<script>
+    async function myfun() {
+    var sem = document.getElementById("check").value;
+    console.log(sem);
+    let url = `http://localhost:8088/student/{enterSemester}?id=${sem}`;
+    let data = await fetch(url);
+    let res = await data.json();
+     q = res.hotels
+     console.log(res)
+    append(res)
+
+}
+
+
+
+function append(res){
+    var cont = document.getElementById("main");
+    cont.innerHTML = '';
+    var sem = document.getElementById("check").value;
+        var div = document.createElement("div");
+       var h1 = document.createElement("h1");
+        h1.innerText = `Average Percentage of whole class in semester ${sem} is ${res}`
+         div.append(h1);
+        cont.append(div);
+   
+  
+}
+
+</script>

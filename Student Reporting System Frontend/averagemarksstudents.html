@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+            width: 70%;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            border: 2px solid black;
+            padding: 15px;
+        }
+        .main>a{
+            text-decoration: none;
+            font-size: 30px;
+            color :black;
+        }
+        .main>a:hover{
+            color: white;
+            background-color: red;
+          
+            font-size:29px ;
+
+        }
+
+        #main{
+            border:  2px solid black;
+            margin-top: 30px;
+        }
+        #main>div{
+            display: flex;
+            justify-content: space-evenly;
+            border:  2px solid teal;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <a href="addstudentwithmarksandsemester.html">Add Student</a>
+        <a href="averagemarksstudents.html">Average Marks</a>
+        <a href="top2students.html">Top 2 Students</a>
+        <a href="percentageofwholeclassinsemester.html">Percentage of Class</a>
+        <a href="seestudentreport.html">Student Report</a>
+        </div>
+
+    <h1>Average marks of Students in a subject</h1>
+
+    <h2>Enter subject name to see average marks of Students in a subject</h2>
+    <input type="text" id="check">
+    <button onclick="myfun()">Submit</button>
+    <div id="main">
+
+    </div>
+</body>
+</html>
+<script>
+    async function myfun() {
+    var subj = document.getElementById("check").value;
+    console.log(subj);
+    let url = `http://localhost:8088/students/{enterSubject}?subject=${subj}`;
+    let data = await fetch(url);
+    let res = await data.json();
+     q = res.hotels
+     console.log(res)
+    append(res)
+
+}
+// myfun();
+
+
+function append(res){
+    var cont = document.getElementById("main");
+    cont.innerHTML = '';
+    var subj = document.getElementById("check").value;
+        var div = document.createElement("div");
+       var h1 = document.createElement("h1");
+        h1.innerText = `Max Marks of all average student in subject ${subj} is ${res}`
+         div.append(h1);
+        cont.append(div);
+   
+  
+}
+
+</script>
